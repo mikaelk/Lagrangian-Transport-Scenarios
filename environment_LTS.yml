@@ -1,4 +1,4 @@
-name: py3_parcels_LTS
+name: py3_parcels_LTS2
 channels:
   - anaconda
   - conda-forge
@@ -246,4 +246,4 @@ dependencies:
     - seabird==0.11.5
     - xarray==0.16.2
     - xlrd==2.0.1
-prefix: /storage/homefs/vo18e689/anaconda3/envs/py3_parcels
+
