@@ -1,5 +1,5 @@
 #!/bin/sh
-module load Workspace
+# module load Workspace
 #####################################################################################
 # General run parameters                                                            #
 #####################################################################################
@@ -12,7 +12,7 @@ DEBUG=1
 # Which scenario would you like to run? The current options are listed below:
 # 'AdvectionDiffusionOnly', 'CoastalProximity', 'Stochastic', 'ShoreDependentResuspension', 'TurrellResuspension',
 # 'SizeTransport', 'FragmentationKaandorp', 'FragmentationKaandorpPartial', 'BlueCloud'
-SCENARIO='BlueCloud'
+SCENARIO='AdvectionDiffusionOnly'
 export SCENARIO
 
 #for scenario 1, the time a particle must be near the coast to beach (in days)
@@ -70,17 +70,17 @@ export RELEASE_SITE
 
 #the starting year of the simulation, how many years the simulation will take, and whether the simulation is forwards
 #or backwards in time
-STARTYEAR=2012
+STARTYEAR=2015
 STARTMONTH_list=(1)
 STARTDAY=1
-BACKWARD=1
+BACKWARD=0
 export STARTYEAR
 export STARTDAY
 export BACKWARD
 
 # Which input distribution do we want to use?
 # 'Jambeck', 'Lebreton', 'LebretonDivision', 'LebretonKaandorpInit', 'Point_Release', 'Uniform'
-INPUT='Lebreton'
+INPUT='Uniform'
 export INPUT
 
 #Which advection data do we want to use?
@@ -89,14 +89,14 @@ ADVECTION_DATA='CMEMS_MEDITERRANEAN'
 export ADVECTION_DATA
 
 #Start year of the simulation. 0 = new simulation, otherwise it picks up from a previous simulation
-START=1
+START=0
 
 #Number of years the simulation runs
-SIMLEN=2
+SIMLEN=1
 export SIMLEN
 
 #Inclusion of Stokes drift. 0 = include stokes, 1 = do not include stokes
-STOKES=0
+STOKES=1
 export STOKES
 
 #Ensemble member
@@ -104,7 +104,7 @@ ENSEMBLE=1
 export ENSEMBLE
 
 #What server everything is running on
-SERVER='UBELIX'
+SERVER='LORENZ'
 export SERVER
 
 #The number of runs we do, dependent on the input scenario.
@@ -201,9 +201,9 @@ for SHORETIME in "${SHORETIME_list[@]}"; do
                 for ((RESTARTNUM=$START; RESTARTNUM<$SIMLEN; RESTARTNUM++)); do
                    export RESTARTNUM
                    runname=$RUNNAMEPREFIX"_run="$RUN"_restart="$RESTARTNUM
-                   part1="#!/bin/sh"
-                   part2="#SBATCH --mail-type=begin,end,fail"
-                   part3="#SBATCH --mail-user=victor.onink@climate.unibe.ch"
+                   part1="#!/bin/bash"
+                   part2="#" #"#SBATCH --mail-type=begin,end,fail"
+                   part3="#" #"#SBATCH --mail-user=victor.onink@climate.unibe.ch"
                    part4="#SBATCH --job-name="$runname
                    part5="#SBATCH --output="runOutput/$runname".o%j"
                    if [ "$DEBUG" -eq "0" ]; then
@@ -214,17 +214,17 @@ for SHORETIME in "${SHORETIME_list[@]}"; do
                      part6="#SBATCH --mem-per-cpu=40G"
                      part7="#SBATCH --time=95:59:00"
                     fi
-                    part8="#SBATCH --partition=epyc2"
-                    part9='#SBATCH --qos=job_epyc2'
+                    part8="#" #"#SBATCH --partition=epyc2"
+                    part9="#" #'#SBATCH --qos=job_epyc2'
                    else
                     part6="#SBATCH --mem-per-cpu=40G"
                     part7="#SBATCH --time=00:20:00"
-                    part8="#SBATCH --partition=epyc2"
-                    part9='#SBATCH --qos=job_epyc2_debug'
+                    part8="#" #"#SBATCH --partition=epyc2"
+                    part9="#" #'#SBATCH --qos=job_epyc2_debug'
                    fi
-                   part10="source /storage/homefs/vo18e689/.bash_profile"
-                   part11="source /storage/homefs/vo18e689/anaconda3/bin/activate py3_parcels"
-                   part12='cd "/storage/homefs/vo18e689/codes/Next-Stage-Plastic-Beaching/"'
+                   part10="#" #"source /storage/homefs/vo18e689/.bash_profile"
+                   part11="#" #"source /storage/homefs/vo18e689/anaconda3/bin/activate py3_parcels"
+                   part12='cd "/nethome/kaand004/Git_repositories/Lagrangian-Transport-Scenarios/"'
                    part13="python src/main.py -p 10 -v"
 
                    #and now the creation of the submission file
@@ -234,14 +234,14 @@ for SHORETIME in "${SHORETIME_list[@]}"; do
                    done
 
                    #Submitting the job
-                   if [ "$RESTARTNUM" -eq "$START" ]; then
-                      jobid=$(sbatch --parsable jobsubmissionFile_${RUN}_${RESTARTNUM}.sh)
-                   else
-                      jobid=$(sbatch --parsable --dependency=afterok:${jobid} jobsubmissionFile_${RUN}_${RESTARTNUM}.sh)
-                   fi
+                 #  if [ "$RESTARTNUM" -eq "$START" ]; then
+                 #     jobid=$(sbatch --parsable jobsubmissionFile_${RUN}_${RESTARTNUM}.sh)
+                 #  else
+                 #     jobid=$(sbatch --parsable --dependency=afterok:${jobid} jobsubmissionFile_${RUN}_${RESTARTNUM}.sh)
+                 #  fi
 
                    #Removing the used submission file
-                   rm jobsubmissionFile_${RUN}_${RESTARTNUM}.sh
+                   #rm jobsubmissionFile_${RUN}_${RESTARTNUM}.sh
                  done
                done
              done

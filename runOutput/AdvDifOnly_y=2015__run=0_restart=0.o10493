@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "src/main.py", line 2, in <module>
+    import settings
+  File "/storage/home/kaand004/Git_repositories/Lagrangian-Transport-Scenarios/src/settings.py", line 58
+    "LORENZ": None}[SERVER]
+            ^
+SyntaxError: invalid syntax

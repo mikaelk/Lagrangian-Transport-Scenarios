@@ -36,11 +36,12 @@ os.system('echo "run="' + SUBMISSION)
 ########################################################################################################################
 
 # DIRECTORIES FOR DATA, INPUTS & OUTPUTS
-SERVER: str = load_env_variable("SERVER", default="UBELIX", variable_type=str)
+SERVER: str = load_env_variable("SERVER", default="LORENZ", variable_type=str)
 
 # BASE DIRECTORY FROM WHICH ALL DATA PATHS ARE DERIVED
 DATA_DIREC: str = {"KUPHAVEN": "/storage/climatestor/Bern3dLPX/onink/alphadata04/lagrangian_sim/",
-                   "UBELIX": "/storage/homefs/vo18e689/Data/"}[SERVER]
+                   "UBELIX": "/storage/homefs/vo18e689/Data/",
+                   "LORENZ": "/storage/shared/oceanparcels/output_data/data_Claudio/"}[SERVER]
 
 # DIRECTORY FOR ALL INPUT AND PREPROCESSING FILES
 DATA_INPUT_DIREC: str = DATA_DIREC + "Input/"
@@ -53,7 +54,8 @@ FIGURE_OUTPUT_DIREC: str = DATA_DIREC + "Output/Figures/"
 
 # SCRATCH DIRECTORY FOR STORING INTERMEDIARY POSTPROCESSING FILES
 SCRATCH_DIREC: str = {"KUPHAVEN": None,
-                      "UBELIX": "/storage/scratch/users/vo18e689/"}[SERVER]
+                      "UBELIX": "/storage/scratch/users/vo18e689/",
+                      "LORENZ": None}[SERVER]
 
 ########################################################################################################################
 #                                                                                                                      #

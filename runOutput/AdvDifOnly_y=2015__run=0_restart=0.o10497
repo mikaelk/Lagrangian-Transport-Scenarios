@@ -1,0 +1,21 @@
+run=simulation
+This is the simulation for the AdvectionDiffusionOnly scenario
+The input scenario is Uniform
+The starting year is 2015-1, and this is run 1, restart 1
+We are using CMEMS_MEDITERRANEAN for the plastic advection
+Traceback (most recent call last):
+  File "src/main.py", line 3, in <module>
+    from factories.scenario_factory import ScenarioFactory
+  File "/storage/home/kaand004/Git_repositories/Lagrangian-Transport-Scenarios/src/factories/scenario_factory.py", line 1, in <module>
+    import scenarios.base_scenario as base_scenario
+  File "/storage/home/kaand004/Git_repositories/Lagrangian-Transport-Scenarios/src/scenarios/base_scenario.py", line 10, in <module>
+    from advection_scenarios import advection_files
+  File "/storage/home/kaand004/Git_repositories/Lagrangian-Transport-Scenarios/src/advection_scenarios/advection_files.py", line 11, in <module>
+    import advection_scenarios.create_input_files as create_input_files
+  File "/storage/home/kaand004/Git_repositories/Lagrangian-Transport-Scenarios/src/advection_scenarios/create_input_files.py", line 11, in <module>
+    import fiona
+  File "/nethome/kaand004/.conda/envs/py3_parcels_LTS/lib/python3.6/site-packages/fiona/__init__.py", line 86, in <module>
+    from fiona.collection import BytesCollection, Collection
+  File "/nethome/kaand004/.conda/envs/py3_parcels_LTS/lib/python3.6/site-packages/fiona/collection.py", line 11, in <module>
+    from fiona.ogrext import Iterator, ItemsIterator, KeysIterator
+ImportError: libnsl.so.1: cannot open shared object file: No such file or directory

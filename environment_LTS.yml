@@ -1,4 +1,4 @@
-name: py3_parcels
+name: py3_parcels_LTS
 channels:
   - anaconda
   - conda-forge
@@ -240,8 +240,7 @@ dependencies:
   - pip:
     - cmocean==2.0
     - dataclasses==0.8
-    - netcdf4==1.5.7
-    - parcels==2.3.1.dev13+g86b5e79
+    - netcdf4==1.5.7   
     - progressbar==2.5
     - pyyaml==5.4.1
     - seabird==0.11.5
