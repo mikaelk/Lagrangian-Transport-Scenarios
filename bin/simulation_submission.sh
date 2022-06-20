@@ -104,7 +104,7 @@ ENSEMBLE=1
 export ENSEMBLE
 
 #What server everything is running on
-SERVER='UBELIX'
+SERVER='lorenz'
 export SERVER
 
 #The number of runs we do, dependent on the input scenario.

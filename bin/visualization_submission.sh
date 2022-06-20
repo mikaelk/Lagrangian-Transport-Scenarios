@@ -14,7 +14,7 @@ DEBUG=1
 SCENARIO='FragmentationKaandorpPartial'
 
 #What server everything is running on
-SERVER='UBELIX'
+SERVER='lorenz'
 export SERVER
 
 export SUBMISSION
@@ -52,7 +52,7 @@ echo $RUNNAMEPREFIX
 # Now the part where we create the submission file                                  #
 #####################################################################################
 runname=$RUNNAMEPREFIX
-if [ $SERVER == "UBELIX" ]; then
+if [ $SERVER == "lorenz" ]; then
   #Submission for ubelix
   part1="#!/bin/sh"
   part2="#SBATCH --mail-type=fail"
@@ -81,7 +81,7 @@ if [ $SERVER == "UBELIX" ]; then
   partGrab="part"$i
   echo ${!partGrab} >> jobsubmissionFile.sh
   done
-elif [ $SERVER == "KUPHAVEN" ]; then
+elif [ $SERVER == "lorenz" ]; then
   #Submission for kuphaven
   part1="#!/bin/sh"
   part2="#SBATCH --mail-type=begin,end,fail"

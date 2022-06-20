@@ -39,21 +39,19 @@ os.system('echo "run="' + SUBMISSION)
 SERVER: str = load_env_variable("SERVER", default="UBELIX", variable_type=str)
 
 # BASE DIRECTORY FROM WHICH ALL DATA PATHS ARE DERIVED
-DATA_DIREC: str = {"KUPHAVEN": "/storage/climatestor/Bern3dLPX/onink/alphadata04/lagrangian_sim/",
-                   "UBELIX": "/storage/homefs/vo18e689/Data/"}[SERVER]
+DATA_DIREC: str = {"lorenz": "/storage/shared/oceanparcels/"}[SERVER]
 
 # DIRECTORY FOR ALL INPUT AND PREPROCESSING FILES
-DATA_INPUT_DIREC: str = DATA_DIREC + "Input/"
+DATA_INPUT_DIREC: str = DATA_DIREC + "input_data/CMEMS/GLOBAL_ANALYSIS_FORECAST_PHY_001_024_SMOC/"
 
 # DIRECTORY FOR ALL PARCELS AND POSTPROCESSING OUTPUT FILES
-DATA_OUTPUT_DIREC: str = DATA_DIREC + "Output/"
+DATA_OUTPUT_DIREC: str = DATA_DIREC + "output_data/data_Claudio/seaclearly/"
 
 # DIRECTORY FOR ALL FIGURES
-FIGURE_OUTPUT_DIREC: str = DATA_DIREC + "Output/Figures/"
+FIGURE_OUTPUT_DIREC: str = DATA_DIREC + "output_data/data_Claudio/seaclearly/Figures/"
 
 # SCRATCH DIRECTORY FOR STORING INTERMEDIARY POSTPROCESSING FILES
-SCRATCH_DIREC: str = {"KUPHAVEN": None,
-                      "UBELIX": "/storage/scratch/users/vo18e689/"}[SERVER]
+SCRATCH_DIREC: str = {"lorenz": None}[SERVER]
 
 ########################################################################################################################
 #                                                                                                                      #

@@ -102,7 +102,7 @@ ENSEMBLE=1
 export ENSEMBLE
 
 #What server everything is running on
-SERVER='UBELIX'
+SERVER='lorenz'
 export SERVER
 
 #A number of switches to indicate which analysis steps we want to run.
