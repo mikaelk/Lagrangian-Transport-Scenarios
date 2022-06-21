@@ -8,11 +8,11 @@ import pandas as pd
 import geopy.distance
 from datetime import timedelta
 import math
-import fiona
-from shapely import vectorized
-from shapely.geometry import shape
-import xarray
-import progressbar
+# import fiona
+# from shapely import vectorized
+# from shapely.geometry import shape
+# import xarray
+# import progressbar
 from parcels import Field
 
 
@@ -347,44 +347,8 @@ class create_input_files:
 
     @staticmethod
     def get_mismanaged_fraction_Jambeck(dataset: Dataset):
-        mismanaged_file = settings.INPUT_DIREC + "Jambeck_mismanaged_grid.nc"
-        if utils.check_file_exist(mismanaged_file):
-            utils.print_statement("The mismanaged grid already exists")
-            return Dataset(mismanaged_file).variables["mismanaged_plastic"][:]
-        else:
-            utils.print_statement("We need to generate the mismanaged grid")
-            # Load the grid of the population data
-            lon_pop, lat_pop = dataset.variables["longitude"][:], dataset.variables["latitude"][:]
-            Lon, Lat = np.meshgrid(lon_pop, lat_pop)
-            # Load the Jambeck estimates of mismanaged plastic per capita
-            jambeck_excel = pd.read_excel(settings.INPUT_DIREC + "Jambeck2010data.xlsx")
-            jambeck_country = list(jambeck_excel["Country"])
-            jambeck_data = jambeck_excel["Mismanaged plastic waste [kg/person/day]7"]
-            # Initialize grid for mismanaged plastic estimates
-            mismanaged_grid = np.zeros(Lon.shape)
-            # Getting the country shapefiles
-            countries = fiona.open(settings.INPUT_DIREC +
-                                   "country_shapefile/gpw_v4_national_identifier_grid_rev11_30_sec.shp")
-            # Looping through all the countries, and marking which of the grid cells fall within which
-            for country_index in progressbar.progressbar(range(len(countries))):
-                if countries[country_index]["properties"]["NAME0"] in jambeck_country:
-                    country_geometry = shape(countries[country_index]["geometry"])
-                    country_mask = vectorized.contains(country_geometry, Lon, Lat)
-                    if country_index in [145, 146]:
-                        # 122 is the Netherlands Antilles value
-                        mismanaged_grid[country_mask] = jambeck_data[122]
-                    else:
-                        mismanaged_grid[country_mask] = jambeck_data[
-                            jambeck_country.index(countries[country_index]["properties"]["NAME0"])]
-            # Saving the entire distance field
-            utils.print_statement("Starting to save the mismanaged grid")
-            coords = [("lat", lat_pop), ("lon", lon_pop)]
-            misman = xarray.DataArray(mismanaged_grid, coords=coords)
-            dcoo = {"lat": lat_pop, "lon": lon_pop}
-            dset = xarray.Dataset({"mismanaged_plastic": misman}, coords=dcoo)
-            dset.to_netcdf(mismanaged_file)
-            utils.print_statement("The mismanaged grid has now been created and saved for future use")
-            return mismanaged_grid
+        raise RuntimeError('Method removed because of incompatible packages (fiona)')
+        return 0
 
     @staticmethod
     def slicing_correction(array: np.array):
